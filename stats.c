@@ -29,17 +29,18 @@ int main(int argc, char *argv[]){
     pthread_create(&tid,NULL,maxCalc,nums);
     pthread_join(tid,NULL);//join threads
     //print results
-    printf("average = %d\n", avg);
-    printf("minimum = %d\n", min);
-    printf("maximum = %d\n", max);
+    printf("The average value is %d\n", avg);
+    printf("The minimum value is %d\n", min);
+    printf("The maximum value is %d\n", max);
 
     
 }
 
 void *avgCalc(void *param){
-    int *nums = (int*)param;
+    int *nums = (int*)param;//cast void argument to int array
     int i;
     int sum = 0;
+    //standard avg calculation loop
     for(i=0; i<size; i++){
     sum += nums[i];
     }
@@ -50,12 +51,12 @@ void *avgCalc(void *param){
 
 void *minCalc(void *param){
     int i;
-    int *nums = (int*)param;
+    int *nums = (int*)param;//cast void argument to int array
     min = nums[0];
+    //loop to calculate the min
     for(i=1; i<size; i++){
-    if(min > nums[i])
-        min = nums[i];
-
+        if(min > nums[i])
+            min = nums[i];
     }
     pthread_exit(0);
 
@@ -64,12 +65,12 @@ void *minCalc(void *param){
 void *maxCalc(void *param){
 
     int i;
-    int *nums = (int*)param;
+    int *nums = (int*)param;//cast void argument to int array
     max = nums[0];
+    //loop to calculate the max
     for(i=1; i<size; i++){
-    if(max < nums[i])
-        max = nums[i];
-
+        if(max < nums[i])
+            max = nums[i];
     }
     pthread_exit(0);
 }
