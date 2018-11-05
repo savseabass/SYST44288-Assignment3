@@ -26,11 +26,10 @@ public class EchoServer {
                 Socket client = server.accept();//wait for a connection by the client using accept();
                 Runnable connection = new MultiThread(client, count);
                 Thread thread = new Thread(connection);
-                thread.start();
+                thread.start(); //Create a new thread
                 id[count-1] = thread.getId();
                 if(Thread.activeCount() != count+1){
                     count = Thread.activeCount();
-                    System.out.println(count+" is now connected");
                 }
                 System.out.println("Clients connected: "+count);
             }
@@ -59,13 +58,13 @@ class MultiThread implements Runnable{
 
     @Override
     public void run(){
-        try{
+        try{ //create streams
             in = s.getInputStream();
             out = s.getOutputStream();
         }catch(IOException e){
             System.err.println(e);
         }
-        try(Scanner scan = new Scanner(in)){
+        try(Scanner scan = new Scanner(in)){ //Collect info and reprint
             pw = new PrintWriter(out, true);
             pw.println("Connected");
             while(scan.hasNextLine()){
