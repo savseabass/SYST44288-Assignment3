@@ -28,7 +28,7 @@ public class EchoClient {
                     System.out.println(input);
 		input = stdIn.readLine(); //store input from user into "input"
                 out.println(input); //write the input from user to the socket 
-            }while( !input.trim().equals("exit"));
+            }while( !input.trim().equals("."));
         } catch (Exception e) {
             System.out.println("Host Unknown: " + "127.0.0.1");
         }
